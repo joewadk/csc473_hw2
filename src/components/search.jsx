@@ -3,7 +3,7 @@ import { useState } from 'react'; //importing react, duh
 const URL = 'https://restaurant-inspection-api-40554916dc60.herokuapp.com'; //base url for api call
 const SearchComponent = () => {
   const [restaurantName, setRestaurantName] = useState(''); //state for restaurant name
-  const [results, setResults] = useState({}); //state for results
+  const [results, setResults] = useState({ data: [] }); //state for results
 
   const handleInputChange = (event) => {
     setRestaurantName(event.target.value);//setting restaurant name to the value of the input
@@ -20,22 +20,21 @@ const SearchComponent = () => {
     }
   };
 
-  return (
+  return (//structured output. include a box for the output json. also used <br> to ensure search button and search box are on diff lines
     <div>
       <input 
         type="text" 
         value={restaurantName} 
         onChange={handleInputChange} 
-        placeholder="Enter restaurant name" //text
-      /> 
-        <br />
+        placeholder="Enter restaurant name" 
+      />
+        <br /> 
       <button onClick={handleSearch}>Search</button>
-      <div> 
-        {Object.keys(results).map((key, index) => (
+      <div>
+        {results.data.map((entry, index) => (//mapping over the results and displaying them in a box
           <div key={index} style={{ border: '1px solid black', margin: '10px', padding: '10px' }}>
-            <pre>{JSON.stringify({ [key]: results[key] }, null, 2)}</pre>
-          </div> //the json response to be formatted using a key:value pair
-          //currently looks really messy, gonna have to fix ui
+            <pre>{JSON.stringify(entry, null, 2)}</pre>
+          </div>
         ))}
       </div>
     </div>
