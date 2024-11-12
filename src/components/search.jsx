@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; //importing react, duh
+import { useState } from 'react'; //importing react, duh
 
 const URL = 'https://restaurant-inspection-api-40554916dc60.herokuapp.com'; //base url for api call
 const SearchComponent = () => {
